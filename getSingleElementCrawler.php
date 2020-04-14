@@ -1,5 +1,5 @@
 <?php
-include_once('simple_html_dom.php');
+include 'init.php';
 $urls = [
     'http://jsjustweb.jihsun.com.tw/z/zc/zcp/zcpa/zcpa0.djhtm?b=Y&a=2330', //資產負債年表
     'http://jsjustweb.jihsun.com.tw/z/zc/zcp/zcpa/zcpa0.djhtm?b=Q&a=2330', //資產負債季表
@@ -10,14 +10,7 @@ $urls = [
 ];
 
 foreach ($urls as $url) {
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_HEADER, 0);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($curl, CURLOPT_URL, $url);
-    $html = curl_exec($curl);
-    $dom = new simple_html_dom(null, true, true, DEFAULT_TARGET_CHARSET, true, DEFAULT_BR_TEXT, DEFAULT_SPAN_TEXT);
-    $html = $dom->load($html, true, true);
-    echo "\n";
+    $html = $curl::initCurl($url);
     foreach ($html->find('td[class=t10]') as $a) {
         $title = $a->plaintext;
         echo($title . "\n");
