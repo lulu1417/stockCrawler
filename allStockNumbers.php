@@ -1,5 +1,5 @@
 <?php
-//include 'init.php';
+include 'init.php';
 
     $urls = ['https://www.tej.com.tw/webtej/doc/uid.htm'];
 
@@ -10,9 +10,12 @@
             foreach ($a->find('tr td[class="xl24"]') as $b){
                 $number = filter_var($b->plaintext, FILTER_SANITIZE_NUMBER_INT);
                 $stockNumbers[$i] = $number;
-//                echo($i . " " . $number . " ");
-//                echo "\n";
+                echo($i . " " . $number . " ");
+                echo "\n";
                 $i++;
+                if($number == 8942){
+                    return;
+                }
             }
 
         }
